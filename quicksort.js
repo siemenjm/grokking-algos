@@ -7,3 +7,25 @@
 //
 // Base case: array of length 0 or 1
 // Recursive case: quicksort(lessArray) + pivot + quicksort(moreArray)
+
+function quicksort(array) {
+  if (array.length <= 1) {
+    return array;
+  } else {
+    const pivot = array[0];
+    let leftArray = [];
+    let rightArray = [];
+
+    for (let i = 1; i < array.length; i++) {
+      if (array[i] <= pivot) {
+        leftArray.push(array[i]);
+      } else {
+        rightArray.push(array[i]);
+      }
+    }
+
+    return [...quicksort(leftArray), pivot, ...quicksort(rightArray)];
+  }
+}
+
+module.exports = quicksort;
