@@ -5,3 +5,15 @@
 //
 // Objects (and Maps) in JS are hash tables/maps that unfortunately overwrite data in collisions. You also don't know the size of the Object
 // Need to build own Hash table/map class with search, insert, and delete methods
+
+// Create HashTable class
+class HashTable {
+  constructor(maxSize) {
+    this.table = new Array(maxSize);
+    this.size = 0;
+  }
+}
+
+const prices = new HashTable(10);
+
+console.log(prices.size);
