@@ -14,4 +14,12 @@ function sumArray(array) {
   }
 }
 
-module.exports = sumArray;
+function listCount(list) {
+  if (list.length === 0) {
+    return 0;
+  } else {
+    return 1 + listCount(list.slice(1));
+  }
+}
+
+module.exports = { sumArray, listCount };
