@@ -22,4 +22,15 @@ function listCount(list) {
   }
 }
 
-module.exports = { sumArray, listCount };
+function maximumNumber(array) {
+  if (array.length === 1) {
+    return array[0];
+  } else if (array[0] > array[1]) {
+    array.splice(1, 1);
+    return maximumNumber(array);
+  } else {
+    return maximumNumber(array.slice(1));
+  }
+}
+
+module.exports = { sumArray, listCount, maximumNumber };
