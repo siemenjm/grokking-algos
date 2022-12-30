@@ -33,4 +33,19 @@ function maximumNumber(array) {
   }
 }
 
-module.exports = { sumArray, listCount, maximumNumber };
+function binarySearch(sortedArray, target) {
+  const middleIndex = Math.floor(sortedArray.length / 2);
+  const guess = sortedArray[middleIndex];
+
+  if (guess === target) {
+    return middleIndex;
+  } else if (guess > target) {
+    return binarySearch(sortedArray.slice(0, middleIndex), target);
+  } else if (guess < target) {
+    return (
+      1 + middleIndex + binarySearch(sortedArray.slice(middleIndex + 1), target)
+    );
+  }
+}
+
+module.exports = { sumArray, listCount, maximumNumber, binarySearch };
