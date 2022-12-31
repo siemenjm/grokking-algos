@@ -80,6 +80,16 @@ class HashTable {
 
     return false;
   }
+
+  // Display method
+  display() {
+    this.table.forEach((values, index) => {
+      const chainedValues = values.map(
+        ([key, value]) => `[ ${key}: ${value} ]`
+      );
+      console.log(`${index}: ${chainedValues}`);
+    });
+  }
 }
 
 const prices = new HashTable(10);
@@ -99,3 +109,5 @@ prices.set('Spain', 110);
 prices.set('ǻ', 192);
 console.log(prices.get('Spain'));
 console.log(prices.get('ǻ'));
+
+console.log(prices.display());
