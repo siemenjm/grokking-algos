@@ -47,17 +47,25 @@ class LinkedList {
 
     return lastNode;
   }
+
+  // Returns the first node
+  getFirst() {
+    return this.head;
+  }
 }
 
 let node1 = new ListNode(2); // Create new node which stores value of 2
 let node2 = new ListNode(5); // Create new node which stores value of 5
+let node3 = new ListNode(10); // Create new node which stores value of 10
 node1.next = node2; // Points node1 to node2
+node2.next = node3; // Points node2 to node3
 
 let list = new LinkedList(node1); // Create linked list with a head of node1
 console.log(list.head.next.data); // Access data stored in node2
 
 console.log('List size: ', list.size());
 
+console.log('First node: ', list.getFirst());
 console.log('Last node: ', list.getLast());
 
 list.clear();
