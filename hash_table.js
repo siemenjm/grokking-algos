@@ -26,15 +26,42 @@ class HashTable {
   // Insertion method
   set(key, value) {
     const index = this._hash(key); // Generates the index where the key:value pair will be placed
-    this.table[index] = [key, value]; // Stores the key:value pair in the hash table at the previously generated index
-    this.size++; // Increments size every time a value is inserted
+
+    if (this.table[index]) {
+      // Checking to see if key:value pair already exists at this index
+      for (let i = 0; i < this.table[index].length; i++) {
+        // Update the key:value pair if key exists
+        if (this.table[index][i][0] === key) {
+          this.table[index][i][1] = value;
+
+          return;
+        }
+      }
+
+      // If key doesn't exist at this index, push new key:value pair
+      this.table[index].push([key, value]);
+    } else {
+      // This is hit if there are no key:value pairs at this index
+      this.table[index] = [];
+      this.table[index].push([key, value]);
+    }
+
+    this.size++; // Increment size
   }
 
   // Search method
   get(key) {
-    const index = this._hash(key); // Finds the index of the key in the hash table
+    const target = this._hash(key); // Finds the index of the key in the hash table
 
-    return this.table[index]; // Returns the key:value pair at that index
+    if (this.table[target]) {
+      for (let i = 0; i < this.table[target].length; i++) {
+        if (this.table[target][i][0] === key) {
+          return this.table[target][i][1];
+        }
+      }
+    }
+
+    return undefined;
   }
 
   // Delete method
@@ -42,10 +69,13 @@ class HashTable {
     const index = this._hash(key);
 
     if (this.table[index] && this.table[index].length) {
-      // Checking to see if the hash table has a truthy value and length greater than 0 at this index
-      this.table[index] = undefined;
-      this.size--; // Decrement the size property when key:value pair is removed
-      return true;
+      for (let i = 0; i < this.table[index].length; i++) {
+        if (this.table[index][i][0] === key) {
+          this.table[index].splice(i, 1);
+          this.size--;
+          return true;
+        }
+      }
     }
 
     return false;
@@ -62,5 +92,10 @@ console.log(prices.get('Apple'));
 console.log(prices.get('Banana'));
 console.log(prices.get('Pizza'));
 
-prices.remove('Banana');
+console.log(prices.remove('Banana'));
 console.log(prices.get('Banana'));
+
+prices.set('Spain', 110);
+prices.set('ǻ', 192);
+console.log(prices.get('Spain'));
+console.log(prices.get('ǻ'));
