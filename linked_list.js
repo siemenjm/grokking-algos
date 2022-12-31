@@ -35,6 +35,18 @@ class LinkedList {
   clear() {
     this.head = null;
   }
+
+  // Returns the last node
+  getLast() {
+    let lastNode = this.head;
+    if (lastNode) {
+      while (lastNode.next) {
+        lastNode = lastNode.next;
+      }
+    }
+
+    return lastNode;
+  }
 }
 
 let node1 = new ListNode(2); // Create new node which stores value of 2
@@ -45,6 +57,8 @@ let list = new LinkedList(node1); // Create linked list with a head of node1
 console.log(list.head.next.data); // Access data stored in node2
 
 console.log('List size: ', list.size());
+
+console.log('Last node: ', list.getLast());
 
 list.clear();
 console.log('List size after clearing: ', list.size());
